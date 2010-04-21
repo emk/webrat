@@ -31,6 +31,14 @@ describe Webrat::Selenium::ApplicationServerFactory do
     Webrat::Selenium::ApplicationServerFactory.app_server_instance
   end
 
+  it "should require and create a rails server in rails thin mode" do
+    server = mock(Webrat::Selenium::ApplicationServers::RailsThin)
+    Webrat.configuration.application_framework = :rails_thin
+    Webrat::Selenium::ApplicationServerFactory.should_receive(:require).with("webrat/selenium/application_servers/rails_thin")
+    Webrat::Selenium::ApplicationServers::RailsThin.should_receive(:new).and_return(server)
+    Webrat::Selenium::ApplicationServerFactory.app_server_instance
+  end
+
   it "should require and create a rails server in external mode" do
     server = mock(Webrat::Selenium::ApplicationServers::External)
     Webrat.configuration.application_framework = :external

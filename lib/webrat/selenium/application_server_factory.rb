@@ -14,6 +14,9 @@ module Webrat
         when :rails
           require "webrat/selenium/application_servers/rails"
           return Webrat::Selenium::ApplicationServers::Rails.new
+        when :rails_thin
+          require "webrat/selenium/application_servers/rails_thin"
+          return Webrat::Selenium::ApplicationServers::RailsThin.new
         when :external
           require "webrat/selenium/application_servers/external"
           return Webrat::Selenium::ApplicationServers::External.new
